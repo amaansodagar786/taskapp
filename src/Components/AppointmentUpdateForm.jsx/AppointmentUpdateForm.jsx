@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import "./AppointmentUpdateForm.scss";
+import './AppointmentUpdateForm.scss';
 
 const AppointmentUpdateForm = () => {
   const [name, setName] = useState('');
   const [position, setPosition] = useState('');
   const [date, setDate] = useState(new Date());
-  const [time, setTime] = useState(''); // Time as string in HH:mm format
+  const [time, setTime] = useState(''); // Time as string (HH:mm format)
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const AppointmentUpdateForm = () => {
         const appointment = response.data;
         setName(appointment.name);
         setPosition(appointment.position);
-        setDate(new Date(appointment.date));
+        setDate(new Date(appointment.date)); // Set date from backend
         setTime(new Date(appointment.time).toISOString().substr(11, 5)); // Format time as HH:mm
         setLoading(false);
       } catch (err) {
@@ -35,16 +35,21 @@ const AppointmentUpdateForm = () => {
     e.preventDefault();
 
     try {
-      // Correctly combine date and time for the update
-      const updatedDateTime = new Date(date); 
+      // Split time into hours and minutes
       const [hours, minutes] = time.split(':');
-      updatedDateTime.setHours(hours, minutes); // Set hours and minutes from the time string
 
+      // Create a new Date object with the current date and set the time
+      const updatedDate = new Date(date); 
+      updatedDate.setHours(hours);
+      updatedDate.setMinutes(minutes);
+      updatedDate.setSeconds(0);  // Ensure seconds are reset
+
+      // Send the updated date and time to the backend
       const updatedAppointment = { 
         name, 
         position, 
-        date: date.toISOString(), 
-        time: updatedDateTime.toISOString() // Send the updated datetime as ISO string
+        date: date.toISOString(), // Date stays as it is
+        time: updatedDate.toISOString() // Updated datetime with correct time
       };
 
       await axios.put(`https://task-backend-n37l.onrender.com/api/appointments/${id}`, updatedAppointment);
