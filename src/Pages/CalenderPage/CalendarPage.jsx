@@ -78,7 +78,7 @@ const CalendarPage = () => {
       <h2>Schedule an Appointment</h2>
       <form onSubmit={handleSubmit}>
         <div className="input-group">
-          
+
           <input
             type="text"
             name="name"
@@ -90,7 +90,7 @@ const CalendarPage = () => {
         </div>
 
         <div className="input-group">
-          
+
           <input
             type="text"
             name="position"
@@ -107,6 +107,7 @@ const CalendarPage = () => {
             onChange={handleDateChange}
             value={date}
             minDate={new Date()}
+            className="custom-calendar"
           />
         </div>
 
@@ -117,16 +118,22 @@ const CalendarPage = () => {
         <div className="input-group">
           <label>Select Time:</label>
           <DatePicker
-            selected={time}
-            onChange={handleTimeChange}
-            showTimeSelect
-            showTimeSelectOnly
-            timeIntervals={30}
-            timeCaption="Time"
-            dateFormat="h:mm aa"
-            minTime={new Date()}
-            maxTime={new Date().setHours(23, 59, 59, 999)}
-          />
+  selected={time}
+  onChange={handleTimeChange}
+  showTimeSelect
+  showTimeSelectOnly
+  timeIntervals={30}
+  timeCaption="Time"
+  dateFormat="h:mm aa"
+  minTime={
+    date.toDateString() === new Date().toDateString()
+      ? new Date() // Current time for today's date
+      : new Date().setHours(8, 0, 0) // 8:00 AM for future dates
+  }
+  maxTime={new Date().setHours(18, 0, 0)} // 6:00 PM
+/>
+
+
         </div>
 
         <button type="submit" className="submit-btn">Schedule Appointment</button>
