@@ -10,7 +10,7 @@ const AppointmentDashboard = () => {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/api/appointments');
+        const response = await axios.get('https://task-backend-n37l.onrender.com/api/appointments');
         setAppointments(response.data);
       } catch (err) {
         console.error('Error fetching appointments', err);
@@ -22,7 +22,7 @@ const AppointmentDashboard = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:4000/api/appointments/${id}`);
+      await axios.delete(`https://task-backend-n37l.onrender.com/api/appointments/${id}`);
       setAppointments(appointments.filter((appt) => appt._id !== id));
     } catch (err) {
       console.error('Error deleting appointment', err);

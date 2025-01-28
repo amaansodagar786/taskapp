@@ -40,13 +40,13 @@ const CalendarPage = () => {
         // Check if the time slot is available before scheduling
         const dateStr = date.toISOString();
         const timeStr = time.toISOString();
-        const response = await axios.get('http://localhost:4000/api/appointments/check-time', {
+        const response = await axios.get('https://task-backend-n37l.onrender.com/api/appointments/check-time', {
           params: { date: dateStr, time: timeStr },
         });
 
         if (response.status === 200) {
           // If time is available, schedule the appointment
-          await axios.post('http://localhost:4000/api/appointments', {
+          await axios.post('https://task-backend-n37l.onrender.com/api/appointments', {
             name,
             position,
             date: dateStr,

@@ -16,7 +16,7 @@ const AppointmentUpdateForm = () => {
     // Fetch the current appointment details for the selected appointment ID
     const fetchAppointmentDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/api/appointments/${id}`);
+        const response = await axios.get(`https://task-backend-n37l.onrender.com/api/appointments/${id}`);
         const appointment = response.data;
         setName(appointment.name);
         setPosition(appointment.position);
@@ -42,7 +42,7 @@ const AppointmentUpdateForm = () => {
         date: date.toISOString(), 
         time: `${date.toISOString().substr(0, 10)}T${time}:00` // Format time to match backend
       };
-      await axios.put(`http://localhost:4000/api/appointments/${id}`, updatedAppointment);
+      await axios.put(`https://task-backend-n37l.onrender.com/api/appointments/${id}`, updatedAppointment);
       navigate('/dashboard'); // Redirect to the dashboard after successful update
     } catch (err) {
       console.error('Error updating appointment', err);

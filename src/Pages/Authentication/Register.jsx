@@ -33,7 +33,7 @@ const Register = () => {
   // Handle form submission
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
-      const response = await fetch('http://localhost:4000/api/register', {
+      const response = await fetch('https://task-backend-n37l.onrender.com/api/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),
@@ -82,7 +82,7 @@ const Register = () => {
                 <ErrorMessage name="password" component="div" className="error-message" />
               </div>
               <ErrorMessage name="submit" component="div" className="error-message" />
-              <button type="submit" className="register-button" disabled={isSubmitting}>
+              <button type="submit" className="register-button" disabled={isSubmitting} onClick={() => alert('Button clicked!')}>
                 {isSubmitting ? 'Registering...' : 'Register'}
               </button>
             </Form>
