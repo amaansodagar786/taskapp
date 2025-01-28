@@ -5,8 +5,8 @@ import Navbar from './Components/Navbar/Navbar';
 import Register from './Pages/Authentication/Register';
 import Login from './Pages/Authentication/Login';
 import CalendarPage from './Pages/CalenderPage/CalendarPage';
-import AppointmentDashboard from './Components/Appointments/AppointmentDashboard';
 import AppointmentUpdateForm from './Components/AppointmentUpdateForm.jsx/AppointmentUpdateForm';
+import AppointmentDashboard from './Components/AppointmentUpdateForm.jsx/AppointmentDashboard';
 
 
 function App() {

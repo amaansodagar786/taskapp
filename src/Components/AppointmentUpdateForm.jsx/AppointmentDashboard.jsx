@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Importing useNavigate
+import { useNavigate } from 'react-router-dom';
+import "./AppointmentDashboard.scss";
 
 const AppointmentDashboard = () => {
   const [appointments, setAppointments] = useState([]);
-  const navigate = useNavigate(); // Initialize the navigate function here
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch appointments when the component mounts
     const fetchAppointments = async () => {
       try {
         const response = await axios.get('http://localhost:4000/api/appointments');
@@ -20,7 +20,6 @@ const AppointmentDashboard = () => {
     fetchAppointments();
   }, []);
 
-  // Delete an appointment
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:4000/api/appointments/${id}`);
@@ -30,15 +29,14 @@ const AppointmentDashboard = () => {
     }
   };
 
-  // Update an appointment (Navigate to update page)
   const handleUpdate = (id) => {
-    navigate(`/update/${id}`); // Use the navigate function to redirect
+    navigate(`/update/${id}`);
   };
 
   return (
-    <div>
+    <div className="appointment-dashboard">
       <h2>Appointments Dashboard</h2>
-      <table>
+      <table className="appointment-table">
         <thead>
           <tr>
             <th>Name</th>
@@ -55,9 +53,9 @@ const AppointmentDashboard = () => {
               <td>{appointment.position}</td>
               <td>{new Date(appointment.date).toDateString()}</td>
               <td>{new Date(appointment.time).toLocaleTimeString()}</td>
-              <td>
-                <button onClick={() => handleUpdate(appointment._id)}>Edit</button>
-                <button onClick={() => handleDelete(appointment._id)}>Delete</button>
+              <td className="actions">
+                <button onClick={() => handleUpdate(appointment._id)} className="edit-btn">Edit</button>
+                <button onClick={() => handleDelete(appointment._id)} className="delete-btn">Delete</button>
               </td>
             </tr>
           ))}

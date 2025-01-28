@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaUserPlus, FaSignInAlt, FaSignOutAlt, FaCalendarAlt } from 'react-icons/fa';
+import { FaUserPlus, FaSignInAlt, FaSignOutAlt, FaCalendarAlt, FaUserShield } from 'react-icons/fa';
 import './Navbar.scss';
 
 const Navbar = () => {
@@ -24,6 +24,13 @@ const Navbar = () => {
               <FaCalendarAlt className="icon" />
               <span>Calendar</span>
             </Link>
+
+            {/* Admin Dashboard Button for logged-in users */}
+            <Link to="/dashboard">
+              <FaUserShield className="icon" />
+              <span>Admin Dashboard</span>
+            </Link>
+            
             <button onClick={handleLogout} className="logout-button">
               <FaSignOutAlt className="icon" />
               <span>Logout</span>

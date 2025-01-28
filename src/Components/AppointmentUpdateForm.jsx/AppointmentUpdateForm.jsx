@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import "./AppointmentUpdateForm.scss";
 
 const AppointmentUpdateForm = () => {
   const [name, setName] = useState('');
   const [position, setPosition] = useState('');
   const [date, setDate] = useState(new Date());
-  const [time, setTime] = useState(new Date());
+  const [time, setTime] = useState(''); // Time as string
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const AppointmentUpdateForm = () => {
         setName(appointment.name);
         setPosition(appointment.position);
         setDate(new Date(appointment.date));
-        setTime(new Date(appointment.time));
+        setTime(new Date(appointment.time).toISOString().substr(11, 5)); // Format time as HH:mm
         setLoading(false);
       } catch (err) {
         console.error('Error fetching appointment details', err);
@@ -34,8 +35,13 @@ const AppointmentUpdateForm = () => {
     e.preventDefault();
 
     try {
-      // Send updated details to backend to save changes
-      const updatedAppointment = { name, position, date, time };
+      // Convert date and time to necessary formats
+      const updatedAppointment = { 
+        name, 
+        position, 
+        date: date.toISOString(), 
+        time: `${date.toISOString().substr(0, 10)}T${time}:00` // Format time to match backend
+      };
       await axios.put(`http://localhost:4000/api/appointments/${id}`, updatedAppointment);
       navigate('/dashboard'); // Redirect to the dashboard after successful update
     } catch (err) {
@@ -84,8 +90,8 @@ const AppointmentUpdateForm = () => {
             <label>Time:</label>
             <input
               type="time"
-              value={time.toISOString().substr(11, 5)} // Format to HH:MM
-              onChange={(e) => setTime(new Date(`1970-01-01T${e.target.value}:00`))}
+              value={time} // Using the string format HH:mm
+              onChange={(e) => setTime(e.target.value)}
               required
             />
           </div>
