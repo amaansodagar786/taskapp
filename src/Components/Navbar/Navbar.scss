@@ -29,11 +29,11 @@
       gap: 0.5rem;
 
       .icon {
-        font-size: 1.2rem; // Icon size adjustment
+        font-size: 1.2rem; 
       }
 
       span {
-        display: none; // Hide text (only show icon)
+        display: none; 
       }
 
       &:hover {
@@ -44,21 +44,21 @@
 
   @media (max-width: 768px) {
     padding: 1rem;
-    width: 100%; // Ensure full width in tablet view
+    width: 100%; 
 
     .navbar-links {
       gap: 1rem;
 
       a {
         .icon {
-          display: inline-block; // Keep text hidden for tablet view
+          display: inline-block; 
         }
       }
     }
   }
 
   @media (max-width: 480px) {
-    width: 100%; // Ensure full width in mobile view
+    width: 100%; 
     padding: 1rem;
 
     .navbar-logo {
@@ -71,12 +71,12 @@
       gap: 1rem;
 
       .icon {
-        font-size: 1.2rem; // Adjust icon size for mobile
+        font-size: 1.2rem; 
       }
 
       a {
         .icon {
-          display: inline-block; // Keep text hidden for mobile view
+          display: inline-block; 
         }
       }
     }

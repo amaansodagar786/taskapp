@@ -35,7 +35,6 @@ const AppointmentUpdateForm = () => {
     e.preventDefault();
 
     try {
-      // Convert date and time to necessary formats
       const updatedAppointment = { 
         name, 
         position, 
@@ -43,7 +42,7 @@ const AppointmentUpdateForm = () => {
         time: `${date.toISOString().substr(0, 10)}T${time}:00` // Format time to match backend
       };
       await axios.put(`https://task-backend-n37l.onrender.com/api/appointments/${id}`, updatedAppointment);
-      navigate('/dashboard'); // Redirect to the dashboard after successful update
+      navigate('/dashboard'); 
     } catch (err) {
       console.error('Error updating appointment', err);
     }
