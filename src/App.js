@@ -7,20 +7,44 @@ import Login from './Pages/Authentication/Login';
 import CalendarPage from './Pages/CalenderPage/CalendarPage';
 import AppointmentUpdateForm from './Components/AppointmentUpdateForm.jsx/AppointmentUpdateForm';
 import AppointmentDashboard from './Components/AppointmentUpdateForm.jsx/AppointmentDashboard';
-
+import ProtectedRoute from './Protected/ProtectedRoute';
 
 function App() {
   return (
     <BrowserRouter>
-    <Navbar/>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/calendar" element={<CalendarPage />} />
-        <Route path="/dashboard" element={<AppointmentDashboard />} />
-        <Route path="/update/:id" element={<AppointmentUpdateForm/>} />
-        {/* <Route path="/update" element={<AppointmentDashboard/>} /> */}
+        
+        {/* Protected Routes */}
+        <Route 
+          path="/calendar" 
+          element={
+            <ProtectedRoute>
+              <CalendarPage />
+            </ProtectedRoute>
+          } 
+        />
+        
+        <Route 
+          path="/dashboard" 
+          element={
+            <ProtectedRoute>
+              <AppointmentDashboard />
+            </ProtectedRoute>
+          } 
+        />
+        
+        <Route 
+          path="/update/:id" 
+          element={
+            <ProtectedRoute>
+              <AppointmentUpdateForm />
+            </ProtectedRoute>
+          } 
+        />
       </Routes>
     </BrowserRouter>
   );

@@ -1,72 +1,78 @@
 .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #007bff;
+  color: white;
+
+  .navbar-logo {
+    a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+  }
+
+  .navbar-links {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background: #007bff;
-    color: white;
-  
-    .navbar-logo {
-      a {
-        color: white;
-        text-decoration: none;
-        font-size: 1.5rem;
-        font-weight: bold;
-      }
-    }
-  
-    .navbar-links {
+    gap: 1.5rem;
+
+    a {
+      color: white;
+      text-decoration: none;
       display: flex;
-      gap: 1.5rem;
-  
+      align-items: center;
+      gap: 0.5rem;
+
+      .icon {
+        font-size: 1.2rem;  // Icon size adjustment
+      }
+
+      span {
+        display: none;  // Hide text (only show icon)
+      }
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+
+    .navbar-links {
+      gap: 1rem;
+
       a {
-        color: white;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-  
         .icon {
-          font-size: 1.2rem;
-        }
-  
-        span {
-          display: inline-block;
-        }
-  
-        &:hover {
-          opacity: 0.8;
-        }
-      }
-    }
-  
-    @media (max-width: 768px) {
-      padding: 1rem;
-  
-      .navbar-links {
-        gap: 1rem;
-  
-        a {
-          span {
-            display: none; // Hide text on mobile
-          }
-        }
-      }
-    }
-  
-    @media (max-width: 480px) {
-      .navbar-logo {
-        a {
-          font-size: 1.2rem;
-        }
-      }
-  
-      .navbar-links {
-        gap: 0.8rem;
-  
-        .icon {
-          font-size: 1rem;
+          display: inline-block;   // Keep text hidden for tablet view
         }
       }
     }
   }
+
+  @media (max-width: 480px) {
+    .navbar-logo {
+      a {
+        font-size: 1.2rem;
+      }
+    }
+
+    .navbar-links {
+      gap: 1rem;
+
+      .icon {
+        font-size: 1.2rem; // Adjust icon size for mobile
+      }
+
+      a {
+        .icon {
+          display: inline-block;  // Keep text hidden for mobile view
+        }
+      }
+    }
+  }
+}

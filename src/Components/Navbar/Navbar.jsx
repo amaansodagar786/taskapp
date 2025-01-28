@@ -15,7 +15,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-        <Link to="/">HR Scheduler</Link>
+        <Link to="/">HR Schedule</Link>
       </div>
       <div className="navbar-links">
         {isLoggedIn ? (
