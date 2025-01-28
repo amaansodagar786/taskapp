@@ -5,6 +5,7 @@
   padding: 1rem 2rem;
   background: #007bff;
   color: white;
+  width: 100%; // Ensure full width
 
   .navbar-logo {
     a {
@@ -27,11 +28,11 @@
       gap: 0.5rem;
 
       .icon {
-        font-size: 1.2rem;  // Icon size adjustment
+        font-size: 1.2rem; // Icon size adjustment
       }
 
       span {
-        display: none;  // Hide text (only show icon)
+        display: none; // Hide text (only show icon)
       }
 
       &:hover {
@@ -42,19 +43,23 @@
 
   @media (max-width: 768px) {
     padding: 1rem;
+    width: 100%; // Ensure full width in tablet view
 
     .navbar-links {
       gap: 1rem;
 
       a {
         .icon {
-          display: inline-block;   // Keep text hidden for tablet view
+          display: inline-block; // Keep text hidden for tablet view
         }
       }
     }
   }
 
   @media (max-width: 480px) {
+    width: 100%; // Ensure full width in mobile view
+    padding: 1rem;
+
     .navbar-logo {
       a {
         font-size: 1.2rem;
@@ -70,7 +75,7 @@
 
       a {
         .icon {
-          display: inline-block;  // Keep text hidden for mobile view
+          display: inline-block; // Keep text hidden for mobile view
         }
       }
     }

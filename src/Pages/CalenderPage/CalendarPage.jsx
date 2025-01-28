@@ -130,7 +130,7 @@ const CalendarPage = () => {
       ? new Date() // Current time for today's date
       : new Date().setHours(8, 0, 0) // 8:00 AM for future dates
   }
-  maxTime={new Date().setHours(18, 0, 0)} // 6:00 PM
+  maxTime={new Date().setHours(19, 0, 0)} // 6:00 PM
 />
 
 
