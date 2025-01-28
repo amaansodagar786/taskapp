@@ -7,7 +7,7 @@ const AppointmentUpdateForm = () => {
   const [name, setName] = useState('');
   const [position, setPosition] = useState('');
   const [date, setDate] = useState(new Date());
-  const [time, setTime] = useState(''); // Time as string
+  const [time, setTime] = useState(''); // Time as string in HH:mm format
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -35,12 +35,18 @@ const AppointmentUpdateForm = () => {
     e.preventDefault();
 
     try {
+      // Correctly combine date and time for the update
+      const updatedDateTime = new Date(date); 
+      const [hours, minutes] = time.split(':');
+      updatedDateTime.setHours(hours, minutes); // Set hours and minutes from the time string
+
       const updatedAppointment = { 
         name, 
         position, 
         date: date.toISOString(), 
-        time: `${date.toISOString().substr(0, 10)}T${time}:00` // Format time to match backend
+        time: updatedDateTime.toISOString() // Send the updated datetime as ISO string
       };
+
       await axios.put(`https://task-backend-n37l.onrender.com/api/appointments/${id}`, updatedAppointment);
       navigate('/dashboard'); 
     } catch (err) {
