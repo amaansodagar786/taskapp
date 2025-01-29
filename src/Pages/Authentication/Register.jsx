@@ -82,7 +82,7 @@ const Register = () => {
                 <ErrorMessage name="password" component="div" className="error-message" />
               </div>
               <ErrorMessage name="submit" component="div" className="error-message" />
-              <button type="submit" className="register-button" disabled={isSubmitting} onClick={() => alert('Button clicked!')}>
+              <button type="submit" className="register-button" disabled={isSubmitting} >
                 {isSubmitting ? 'Registering...' : 'Register'}
               </button>
             </Form>
