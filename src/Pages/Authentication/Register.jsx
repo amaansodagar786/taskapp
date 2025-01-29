@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaUser, FaLock, FaEnvelope } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { Snackbar, Alert } from '@mui/material';
 import './Register.scss';
-
-
 
 const Register = () => {
   const navigate = useNavigate();
+  const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'info' });
 
   // Initial form values
   const initialValues = {
@@ -42,13 +42,15 @@ const Register = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // alert('Registration successful! Please login.');
-        navigate('/login'); // Redirect to login page
+        setSnackbar({ open: true, message: 'Registration successful! Redirecting to login...', severity: 'success' });
+        setTimeout(() => navigate('/login'), 2000); // Redirect after 2 seconds
       } else {
         setErrors({ submit: data.message || 'Registration failed' });
+        setSnackbar({ open: true, message: data.message || 'Registration failed', severity: 'error' });
       }
     } catch (err) {
       setErrors({ submit: 'An error occurred. Please try again.' });
+      setSnackbar({ open: true, message: 'An error occurred. Please try again.', severity: 'error' });
       console.error('Error:', err);
     } finally {
       setSubmitting(false);
@@ -59,11 +61,7 @@ const Register = () => {
     <div className="register-container">
       <div className="register-box">
         <h2>Register</h2>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
+        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
           {({ isSubmitting }) => (
             <Form>
               <div className="input-group">
@@ -82,7 +80,7 @@ const Register = () => {
                 <ErrorMessage name="password" component="div" className="error-message" />
               </div>
               <ErrorMessage name="submit" component="div" className="error-message" />
-              <button type="submit" className="register-button" disabled={isSubmitting} >
+              <button type="submit" className="register-button" disabled={isSubmitting}>
                 {isSubmitting ? 'Registering...' : 'Register'}
               </button>
             </Form>
@@ -92,6 +90,14 @@ const Register = () => {
           Already have an account? <Link to="/login">Login here</Link>.
         </p>
       </div>
+
+      {/* Snackbar for notifications */}
+      <Snackbar open={snackbar.open} autoHideDuration={2000} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}>
+        <Alert onClose={() => setSnackbar({ ...snackbar, open: false })} severity={snackbar.severity} sx={{ width: '100%' }}>
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };
