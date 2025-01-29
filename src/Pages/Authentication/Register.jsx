@@ -42,7 +42,7 @@ const Register = () => {
       const data = await response.json();
 
       if (response.ok) {
-        alert('Registration successful! Please login.');
+        // alert('Registration successful! Please login.');
         navigate('/login'); // Redirect to login page
       } else {
         setErrors({ submit: data.message || 'Registration failed' });
